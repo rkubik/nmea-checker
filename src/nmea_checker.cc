@@ -1,4 +1,5 @@
 #include "valid_command.hpp"
+#include "checksum_command.hpp"
 
 #include <iostream>
 #include <string>
@@ -17,8 +18,10 @@ int main(int argc, char *argv[])
     try {
         if (command == "valid") {
             runner = move(unique_ptr<ValidCommand>(new ValidCommand()));
+        } else if (command == "checksum") {
+            runner = move(unique_ptr<ChecksumCommand>(new ChecksumCommand()));
         }
-        return runner->run(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE;
+        return runner->execute(argc, argv) ? EXIT_SUCCESS : EXIT_FAILURE;
     } catch(const runtime_error &e) {
         cerr << "Error: " << e.what() << endl;
     }

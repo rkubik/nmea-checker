@@ -1,21 +1,21 @@
-Source: serial-proxy
+Source: nmea-checker
 Priority: optional
 Maintainer: Russ Kubik <russkubik@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), cmake, liblogcpp-dev, libboost-program-options-dev, libinicpp-dev
+Build-Depends: debhelper (>= 8.0.0), cmake, libboost-program-options-dev
 Standards-Version: 3.9.3
 Section: non-free/embedded
 
-Package: serial-proxy
+Package: nmea-checker
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Serial Port Virtualizer
- Allows a single physical serial port to proxy its
- data to many child pseudoterminals
+Description: NMEA sentence checker and validator
+ Validate NMEA data streams to ensure the data is not
+ corrupt
 
-Package: serial-proxy-dbg
+Package: nmea-checker-dbg
 Section: debug
 Architecture: any
 Priority: extra
 Depends: serial-proxy (= ${binary:Version}), ${misc:Depends}
-Description: serial-proxy debug symbols
- Debugging symbols for serial-proxy library
+Description: nmea-checker debug symbols
+ Debugging symbols for nmea-checker

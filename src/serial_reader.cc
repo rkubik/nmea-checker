@@ -13,14 +13,19 @@ volatile bool SerialReader::signal_ = false;
 SerialReader::SerialReader(const string &device) : fd_(-1), done_(false)
 {
     fd_ = open(device.c_str(), O_RDWR | O_NOCTTY);
+
     if (fd_ == -1) {
         throw runtime_error("Unable to open serial device: " + device);
     }
 
     struct termios ts;
-    tcgetattr(fd_, &ts);
+    if (tcgetattr(fd_, &ts) == -1) {
+        throw runtime_error("tcgetattr failed");
+    }
     cfmakeraw(&ts);
-    tcsetattr(fd_, TCSANOW, &ts);
+    if (tcsetattr(fd_, TCSANOW, &ts) == -1) {
+        throw runtime_error("tcsetattr failed");
+    }
 
     signal(SIGINT, signal_handler);
 }
@@ -60,7 +65,7 @@ string SerialReader::read_line(void)
 
         if (start) {
             line += buffer[0];
-            if (buffer[0] == '\n' || buffer[0] == '\r') {
+            if (buffer[0] == '\n') {
                 break;
             }
         }

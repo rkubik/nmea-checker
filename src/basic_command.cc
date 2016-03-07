@@ -14,7 +14,7 @@ BasicCommand::BasicCommand(void)
     pos_.add("command", 1);
 }
 
-bool BasicCommand::run(int argc, char* argv[])
+bool BasicCommand::execute(int argc, char* argv[])
 {
     try {
         po::store(
@@ -50,9 +50,9 @@ bool BasicCommand::usage(const string &error)
 
 bool BasicCommand::usage(void)
 {
-    cout << "nmea-chcker - NMEA sentence validation tool" << endl << endl
+    cout << "nmea-checker - NMEA sentence validation tool" << endl << endl
          << "USAGE" << endl << endl
-         << "\tnmea-chcker [COMMAND] [OPTIONS...]" << endl << endl
+         << "\tnmea-checker [COMMAND] [OPTIONS...]" << endl << endl
          << "COMMAND" << endl << endl
          << "  valid" << endl
          << "  checksum" << endl << endl
